@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <title>Carga la imagen</title>
+        <style type="text/css">
+                    h1{
+                    color:red;
+
+                    }
+        </style>
+        <script type="text/javascript" src="interfazDescarga.js"></script>
+        <script type="text/javascript" src="interfazLectura.js"></script>
+    </head>
+    <body>
+    <img>
+    <center><h1>Imagen cargada desde el assets de la app</h1></center>
+        <center><img src="iconlogo.png" id="restaurante"  alt="restaurante"></center>
+
+        </br>
+
+        <input type="button" value="Mostrar Toast" onClick="showAndroidToast('Toast creado en Javacript')"/>
+        <input type="button" value="Importar Texto" onClick="mostrarTexto()"/>
+        <input type="button" value="Guardar fichero" onClick="descargarArchivo()"/>
+        <input type="button" value="Leer fichero" onClick="leerArchivo()"/>
+        <img id="imagen"/>
+        <center><div id="image" style="width:50%"></div></center>
+
+        </br></br>
+
+        <div >
+
+            <h3 id="texto"></h3>
+        </div>
+
+        <script type="text/javascript">
+
+               function showAndroidToast(toast) {
+                    Android.showToast(toast);
+                }
+
+               function mostrarTexto() {
+
+                   var datos= Android.getText();
+                   document.getElementById('texto').innerHTML=datos;
+
+               }
+
+                function descargarArchivo(){
+                    Interfaz.descargar("https://blog.hubspot.es/hubfs/WhatsApp%20Image%202021-05-31%20at%205.48.51%20PM.jpeg","portatil.jpg",
+                        function(exito){
+                            console.log("La descarga de hubspot se realizo con exito " + exito);
+                            document.getElementById('texto').innerHTML +="descarga  de hubspot realizada con exito: "+exito+"<br/>";
+                        });
+
+
+                    Interfaz.descargar("https://www.gstatic.com/devrel-devsite/prod/vff7e8445fa7d53cc21534f5556b6a4ee6bfada97ce5d2ad049b51bab5c641518/android/images/lockup.svg","lockup.svg",
+                        function(exito){
+                            console.log("La segunda descarga del logo se realizo con exito " + exito);
+                            document.getElementById('texto').innerHTML +="descarga  de logo realizada con exito: "+exito+"<br/>";
+                        });
+                }
+
+                function leerArchivo(){
+                  lecturaArchivo("lockup.svg");
+
+                }
+
+                function getImage()
+                 {
+                   Android.lecturaArchivo("lockup.svg");
+                   Android.lecturaArchivo("portatil.jpg");
+                 }
+
+                function image(src) {
+                    var img = document.createElement("img");
+                    img.src = src;
+                    document.getElementById('image').appendChild(img);
+                }
+        </script>
+    </body>
+</html>
